@@ -1,4 +1,4 @@
-<<<<<<< HEAD
+HEAD
 const Trip = require('../models/Trip');
 
 const createTrip = async (req, res) => {
@@ -86,7 +86,7 @@ const deleteTrip = async (req, res) => {
 };
 
 
-=======
+
 const Trip = require('../models/Trip');
 
 const createTrip = async (req, res) => {

@@ -1,4 +1,4 @@
-<<<<<<< HEAD
+ HEAD
 const Budget = require('../models/Budget');
 
 const createBudget = async (req, res) => {
@@ -35,7 +35,7 @@ res.json({ message: 'Budget removed' });
 
 
 module.exports = { createBudget, getBudgets, updateBudget, deleteBudget };
-=======
+
 const Budget = require('../models/Budget');
 
 const createBudget = async (req, res) => {

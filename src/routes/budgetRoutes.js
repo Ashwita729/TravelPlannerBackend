@@ -1,4 +1,4 @@
-<<<<<<< HEAD
+HEAD
 const express = require('express');
 const { createBudget, getBudgets, updateBudget, deleteBudget } = require('../controllers/budgetController');
 const { protect } = require('../middlewares/authMiddleware');
@@ -14,7 +14,7 @@ router.route('/:id')
   .delete(protect, deleteBudget);
 
 module.exports = router;
-=======
+
 const express = require('express');
 const { createBudget, getBudgets, updateBudget } = require('../controllers/budgetController');
 const { protect } = require('../middlewares/authMiddleware');
