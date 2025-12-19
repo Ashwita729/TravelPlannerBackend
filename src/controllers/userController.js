@@ -1,54 +1,31 @@
-HEAD
 const User = require('../models/User');
-const bcrypt = require('bcryptjs');
 
-const getAllUsers = async (req, res) => {
+const getUserProfile = async (req, res) => {
   try {
-    const users = await User.find({}).select('-password');
-    res.json(users);
+    const user = await User.findById(req.user._id).select('-password');
+    res.json(user);
   } catch (error) {
     res.status(500).json({ message: error.message });
   }
 };
 
-const updateUser = async (req, res) => {
-  const user = await User.findById(req.user._id);
-  if (!user) return res.status(404).json({ message: 'User not found' });
-
-  user.name = req.body.name || user.name;
-  if (req.body.password) {
-    const salt = await bcrypt.genSalt(10);
-    user.password = await bcrypt.hash(req.body.password, salt);
-  }
-  await user.save();
-  res.json({ _id: user._id, name: user.name, email: user.email });
-};
-
-
-const User = require('../models/User');
-const bcrypt = require('bcryptjs');
-
-const getAllUsers = async (req, res) => {
+const updateUserProfile = async (req, res) => {
   try {
-    const users = await User.find({}).select('-password');
-    res.json(users);
+    const user = await User.findById(req.user._id);
+    if (!user) return res.status(404).json({ message: 'User not found' });
+
+    user.name = req.body.name || user.name;
+    user.email = req.body.email || user.email;
+
+    const updatedUser = await user.save();
+    res.json({
+      _id: updatedUser._id,
+      name: updatedUser.name,
+      email: updatedUser.email,
+    });
   } catch (error) {
     res.status(500).json({ message: error.message });
   }
 };
 
-const updateUser = async (req, res) => {
-  const user = await User.findById(req.user._id);
-  if (!user) return res.status(404).json({ message: 'User not found' });
-
-  user.name = req.body.name || user.name;
-  if (req.body.password) {
-    const salt = await bcrypt.genSalt(10);
-    user.password = await bcrypt.hash(req.body.password, salt);
-  }
-  await user.save();
-  res.json({ _id: user._id, name: user.name, email: user.email });
-};
-
->>>>>>> edc444351689a023e24478713c5f645222377be1
-module.exports = { getAllUsers, updateUser };
+module.exports = { getUserProfile, updateUserProfile };
